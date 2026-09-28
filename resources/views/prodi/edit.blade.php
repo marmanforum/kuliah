@@ -27,7 +27,13 @@
 
             <div class="form-field">
                 <label for="akreditasi">Akreditasi</label>
-                <input id="akreditasi" name="akreditasi" value="{{ old('akreditasi', $prodi->akreditasi) }}" class="form-control @error('akreditasi') is-invalid @enderror" required>
+                <select id="akreditasi" name="akreditasi" class="form-select @error('akreditasi') is-invalid @enderror" required>
+                    <option value="">Pilih Akreditasi</option>
+                    <option value="unggul" @selected(old('akreditasi', strtolower($prodi->akreditasi)) === 'unggul')>Unggul</option>
+                    <option value="baik" @selected(old('akreditasi', strtolower($prodi->akreditasi)) === 'baik')>Baik</option>
+                    <option value="sangat baik" @selected(old('akreditasi', strtolower($prodi->akreditasi)) === 'sangat baik')>Sangat Baik</option>
+                    <option value="belum terakreditasi" @selected(old('akreditasi', strtolower($prodi->akreditasi)) === 'belum terakreditasi')>Belum Terakreditasi</option>
+                </select>
                 @error('akreditasi')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

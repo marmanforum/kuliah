@@ -24,7 +24,7 @@ class ProdiController extends Controller
     {
         $validated = $request->validate([
             'nama_prodi' => ['required', 'string', 'max:150'],
-            'akreditasi' => ['required', 'string', 'max:50'],
+            'akreditasi' => ['required', 'in:unggul,baik,sangat baik,belum terakreditasi'],
             'foto_profil' => ['nullable', 'image', 'max:2048'],
         ]);
 
@@ -53,7 +53,7 @@ class ProdiController extends Controller
     {
         $validated = $request->validate([
             'nama_prodi' => ['required', 'string', 'max:150'],
-            'akreditasi' => ['required', 'string', 'max:50'],
+            'akreditasi' => ['required', 'in:unggul,baik,sangat baik,belum terakreditasi'],
             'foto_profil' => ['nullable', 'image', 'max:2048'],
         ]);
 
