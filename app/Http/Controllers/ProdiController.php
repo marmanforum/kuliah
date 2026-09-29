@@ -74,10 +74,6 @@ class ProdiController extends Controller
 
     public function destroy(Prodi $prodi)
     {
-        foreach ($prodi->mahasiswa()->whereNotNull('foto_mahasiswa')->pluck('foto_mahasiswa') as $photo) {
-            Storage::disk('public')->delete($photo);
-        }
-
         if ($prodi->foto_profil) {
             Storage::disk('public')->delete($prodi->foto_profil);
         }

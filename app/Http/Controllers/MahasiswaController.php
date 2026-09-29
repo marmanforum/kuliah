@@ -12,7 +12,14 @@ class MahasiswaController extends Controller
 {
     public function index()
     {
-        $mahasiswa = Mahasiswa::with('prodi')->get();
+        $mahasiswa = Mahasiswa::query()
+            ->leftJoin('prodi as sort_prodi', 'mahasiswa.prodi_id', '=', 'sort_prodi.id')
+            ->select('mahasiswa.*')
+            ->with('prodi')
+            ->orderByRaw('CASE WHEN sort_prodi.id IS NULL THEN 1 ELSE 0 END')
+            ->orderBy('sort_prodi.nama_prodi')
+            ->orderBy('mahasiswa.nama_mahasiswa')
+            ->get();
 
         return view('mahasiswa.index', compact('mahasiswa'));
     }
@@ -32,7 +39,7 @@ class MahasiswaController extends Controller
             'jenis_kelamin' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
             'alamat' => ['required', 'string'],
             'foto_mahasiswa' => ['nullable', 'image', 'max:2048'],
-            'prodi_id' => ['required', 'exists:prodi,id'],
+            'prodi_id' => ['nullable', 'exists:prodi,id'],
         ]);
 
         if ($request->hasFile('foto_mahasiswa')) {
@@ -66,7 +73,7 @@ class MahasiswaController extends Controller
             'jenis_kelamin' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
             'alamat' => ['required', 'string'],
             'foto_mahasiswa' => ['nullable', 'image', 'max:2048'],
-            'prodi_id' => ['required', 'exists:prodi,id'],
+            'prodi_id' => ['nullable', 'exists:prodi,id'],
         ]);
 
         if ($request->hasFile('foto_mahasiswa')) {

@@ -31,13 +31,13 @@ class MataKuliahController extends Controller
             'sks' => ['required', 'integer', 'min:1', 'max:24'],
             'mahasiswa_ids' => ['required', 'array', 'min:1'],
             'mahasiswa_ids.*' => ['exists:mahasiswa,id'],
-            'prodi_id' => ['required', 'exists:prodi,id'],
+            'prodi_id' => ['nullable', 'exists:prodi,id'],
         ]);
 
         $mataKuliah = MataKuliah::create([
             'nama_mata_kuliah' => $validated['nama_mata_kuliah'],
             'sks' => $validated['sks'],
-            'prodi_id' => $validated['prodi_id'],
+            'prodi_id' => $validated['prodi_id'] ?? null,
         ]);
 
         $mataKuliah->mahasiswa()->sync($validated['mahasiswa_ids']);
@@ -71,13 +71,13 @@ class MataKuliahController extends Controller
             'sks' => ['required', 'integer', 'min:1', 'max:24'],
             'mahasiswa_ids' => ['required', 'array', 'min:1'],
             'mahasiswa_ids.*' => ['exists:mahasiswa,id'],
-            'prodi_id' => ['required', 'exists:prodi,id'],
+            'prodi_id' => ['nullable', 'exists:prodi,id'],
         ]);
 
         $mataKuliah->update([
             'nama_mata_kuliah' => $validated['nama_mata_kuliah'],
             'sks' => $validated['sks'],
-            'prodi_id' => $validated['prodi_id'],
+            'prodi_id' => $validated['prodi_id'] ?? null,
         ]);
 
         $mataKuliah->mahasiswa()->sync($validated['mahasiswa_ids']);

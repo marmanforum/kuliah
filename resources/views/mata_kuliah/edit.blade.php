@@ -53,8 +53,8 @@
 
             <div class="form-field">
                 <label for="prodi_id">Program Studi</label>
-                <select id="prodi_id" name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror" required>
-                    <option value="">Pilih prodi</option>
+                <select id="prodi_id" name="prodi_id" class="form-select @error('prodi_id') is-invalid @enderror">
+                    <option value="" @selected(old('prodi_id', $mataKuliah->prodi_id) == '')>Belum Mengikuti Prodi</option>
                     @foreach($prodi as $item)
                         <option value="{{ $item->id }}" @selected(old('prodi_id', $mataKuliah->prodi_id) == $item->id)>{{ $item->nama_prodi }}</option>
                     @endforeach

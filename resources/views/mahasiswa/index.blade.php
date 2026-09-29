@@ -51,7 +51,7 @@
                             <td>{{ $item->nim }}</td>
                             <td>{{ $item->nama_mahasiswa }}</td>
                             <td>{{ $item->jenis_kelamin }}</td>
-                            <td>{{ $item->prodi?->nama_prodi ?? '-' }}</td>
+                            <td>{{ $item->prodi?->nama_prodi ?? 'Belum Mengikuti Prodi' }}</td>
                             <td>
                                 <div class="action-group">
                                     <a href="{{ route('mahasiswa.show', $item) }}" class="btn btn-info"><i class="bi bi-eye me-1"></i>Detail</a>
